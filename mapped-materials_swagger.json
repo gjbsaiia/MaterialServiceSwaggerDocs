@@ -1,0 +1,457 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "materials-api  (mapped) v2",
+    "version": "v2"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:44377"
+    }
+  ],
+  "paths": {
+    "/Material/MaterialCodes": {
+      "get": {
+        "tags": [
+          "MappedMaterial"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MaterialCodeSet"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MaterialCodeSet"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MaterialCodeSet"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Material/CodeYears": {
+      "post": {
+        "tags": [
+          "MappedMaterial"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CodeYearSetRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CodeYearSetRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CodeYearSetRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodeYearSet"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodeYearSet"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodeYearSet"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Material/ValidMaterials": {
+      "post": {
+        "tags": [
+          "MappedMaterial"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MaterialRequestInput"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MaterialRequestInput"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MaterialRequestInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MappedMaterialResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MappedMaterialResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MappedMaterialResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CodeYearSet": {
+        "type": "object",
+        "properties": {
+          "materialCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "codeYears": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CodeYearSetRequest": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "KeyValue": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MappedAttribute": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "materialsMap": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MappedMaterialResult": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "year": {
+            "type": "string",
+            "nullable": true
+          },
+          "spec": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MappedAttribute"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "grade": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MappedAttribute"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "uns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MappedAttribute"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "cct": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MappedAttribute"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "size": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MappedAttribute"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "modifier": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MappedAttribute"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "physicalSource": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MappedAttribute"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "yieldSource": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MappedAttribute"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "validMaterials": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidMaterial"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MaterialCodeSet": {
+        "type": "object",
+        "properties": {
+          "codes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KeyValue"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MaterialRequestInput": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "productForm": {
+            "type": "string",
+            "nullable": true
+          },
+          "spec": {
+            "type": "string",
+            "nullable": true
+          },
+          "grade": {
+            "type": "string",
+            "nullable": true
+          },
+          "year": {
+            "type": "string",
+            "nullable": true
+          },
+          "uns": {
+            "type": "string",
+            "nullable": true
+          },
+          "cct": {
+            "type": "string",
+            "nullable": true
+          },
+          "size": {
+            "type": "string",
+            "nullable": true
+          },
+          "modifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "yieldSource": {
+            "type": "string",
+            "nullable": true
+          },
+          "physicalSource": {
+            "type": "string",
+            "nullable": true
+          },
+          "metric": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "NameValue": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ValidMaterial": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "year": {
+            "type": "string",
+            "nullable": true
+          },
+          "spec": {
+            "type": "string",
+            "nullable": true
+          },
+          "grade": {
+            "type": "string",
+            "nullable": true
+          },
+          "uns": {
+            "type": "string",
+            "nullable": true
+          },
+          "cct": {
+            "type": "string",
+            "nullable": true
+          },
+          "size": {
+            "type": "string",
+            "nullable": true
+          },
+          "modifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "yieldSource": {
+            "type": "string",
+            "nullable": true
+          },
+          "physicalSource": {
+            "type": "string",
+            "nullable": true
+          },
+          "source": {
+            "type": "string",
+            "nullable": true
+          },
+          "form": {
+            "type": "string",
+            "nullable": true
+          },
+          "notes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NameValue"
+            },
+            "nullable": true
+          },
+          "sourceNotes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NameValue"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "oauth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://auth.e2g.com/connect/authorize",
+            "tokenUrl": "https://auth.e2g.com/connect/token",
+            "scopes": {
+              "e2g.materials-api": "Materials API - Full Access"
+            }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "oauth2": [
+        "e2g.materials-api"
+      ]
+    }
+  ]
+}
